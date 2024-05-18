@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECAP Login</title>
+</head>
+<body>
+    <h1>ECAP</h1>
+    <div id="loginForm">
+        <h2>Login</h2>
+        <form id="login">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <button type="button" onclick="checkLogin()">Sign In</button>
+        </form>
+    </div>
+
+    <div id="options" style="display: none;">
+        <h2>Please select your Options</h2>
+        <label for="state">Select State:</label>
+        <select id="state">
+            <option value="AP">Andhra Pradesh</option>
+            <option value="TG">Telangana</option>
+        </select><br><br>
+
+        <div id="apOptions" style="display: none;">
+            <label for="college">Select College:</label>
+            <select id="college">
+                <option value="Avanthi College">Avanthi College</option>
+                <option value="MVR College">MVR College</option>
+                <option value="KGF">KGF</option>
+                <option value="ABC">ABC</option>
+            </select><br><br>
+
+            <div id="kgfOptions" style="display: none;">
+                <label for="branch">Select Branch:</label>
+                <select id="branch">
+                    <option value="Civil">Civil</option>
+                    <option value="Mechanical">Mechanical</option>
+                    <option value="Chemical">Chemical</option>
+                    <option value="Computer">Computer</option>
+                    <option value="Aerospace">Aerospace</option>
+                    <option value="Electrical">Electrical</option>
+                </select><br><br>
+
+                <div id="computerOptions" style="display: none;">
+                    <label for="student">Select Student:</label>
+                    <select id="student">
+                        <option value="Srikanth">Srikanth</option>
+                        <option value="Dilip">Dilip</option>
+                        <option value="Kamala">Kamala</option>
+                        <option value="Jyothi">Jyothi</option>
+                    </select><br><br>
+
+                    <button type="button" onclick="showProfile()">View Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="profile" style="display: none;">
+        <h2 id="profileHeading"></h2>
+        <div id="profileDetails"></div>
+    </div>
+
+    <script>
+        function checkLogin() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            if (username === "admin" && password === "password") {
+                document.getElementById("loginForm").style.display = "none";
+                document.getElementById("options").style.display = "block";
+            } else {
+                alert("Invalid username or password!");
+            }
+        }
+
+        function showProfile() {
+            var student = document.getElementById("student").value;
+            if (student === "Dilip") {
+                document.getElementById("profileHeading").innerText = "Dilip Profile";
+                var profileDetails = document.getElementById("profileDetails");
+                profileDetails.innerHTML = "<p>Name: Dilip</p><p>Group: Computer</p><p>College: KGF</p><p>State: Andhra Pradesh</p><p>Grade: A</p><p>Skill: DevOps</p><p>Package: 2CR</p>";
+                document.getElementById("profile").style.display = "block";
+            } else {
+                alert("Profile not available for selected student!");
+            }
+        }
+
+        document.getElementById("state").addEventListener("change", function() {
+            var state = this.value;
+            if (state === "AP") {
+                document.getElementById("apOptions").style.display = "block";
+            } else {
+                document.getElementById("apOptions").style.display = "none";
+            }
+        });
+
+        document.getElementById("college").addEventListener("change", function() {
+            var college = this.value;
+            if (college === "KGF") {
+                document.getElementById("kgfOptions").style.display = "block";
+            } else {
+                document.getElementById("kgfOptions").style.display = "none";
+            }
+        });
+
+        document.getElementById("branch").addEventListener("change", function() {
+            var branch = this.value;
+            if (branch === "Computer") {
+                document.getElementById("computerOptions").style.display = "block";
+            } else {
+                document.getElementById("computerOptions").style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
